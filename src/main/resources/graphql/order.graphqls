@@ -1,0 +1,34 @@
+type Order {
+    id: ID!
+    quantity: Int!,
+    date: Date!
+    status: String!,
+    customer: Customer,
+    product: Product!
+}
+
+type OrderSummary {
+    orderId : ID!
+    customer: String!
+    product: String!
+    quantity: Int!
+}
+
+input OrderInput {
+    id: ID
+    quantity: Int!,
+    status: String!,
+    customerId: ID!,
+    productId: ID!
+}
+
+extend type Query {
+    order(id:ID!):Order
+    orders(page:Int = 0, size:Int = 10):[Order]!
+    orderSummary:[OrderSummary]
+}
+
+extend type Mutation {
+    saveOrder(order:OrderInput!):Order!
+    deleteOrder(id:ID!):Boolean!
+}

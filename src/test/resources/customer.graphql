@@ -1,0 +1,7 @@
+{
+    customer {
+        id
+        name
+        email
+    }
+}

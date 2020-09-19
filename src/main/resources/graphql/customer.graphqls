@@ -1,0 +1,32 @@
+scalar Date
+
+type Mutation {
+
+}
+
+type Customer {
+    id:ID!,
+    name:String!
+    email:String!
+
+    orders:[Order]!
+}
+
+input CustomerInput {
+    id:ID,
+    name:String!
+    email:String!
+}
+
+extend type Query {
+    customer(id:ID!):Customer
+
+    customers:[Customer]!
+}
+
+extend type Mutation {
+
+    saveCustomer(customer:CustomerInput!):Customer!
+
+    deleteCustomer(id:ID!):Boolean!
+}
