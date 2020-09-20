@@ -1,13 +1,11 @@
-package com.example.demo.graphql;
+package com.example.demo.graphql.scalar;
 
 import com.example.demo.utils.DateUtils;
 import graphql.language.StringValue;
 import graphql.schema.*;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Component
 public class DateScalar extends GraphQLScalarType {
 
     private static final String NAME = "Date";
@@ -42,7 +40,7 @@ public class DateScalar extends GraphQLScalarType {
                 if(dt != null) {
                     return dt;
                 }
-                throw new CoercingParseLiteralException("Invalid Date: " + input);
+                throw new RuntimeException("Invalid Date: " + input);
             }
         });
     }

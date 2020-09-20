@@ -1,4 +1,4 @@
-package com.example.demo.graphql;
+package com.example.demo.graphql.input;
 
 import lombok.Data;
 

@@ -4,42 +4,41 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.demo.domain.Order;
 import com.example.demo.graphql.dto.OrderSummary;
+import com.example.demo.graphql.input.OrderInput;
 import com.example.demo.service.CustomerService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
-@Component
 public class OrderGraphQL implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    @Autowired
-    private OrderService service;
-
-    @Autowired
+    private OrderService orderService;
     private CustomerService customerService;
-
-    @Autowired
     private ProductService productService;
 
+    public OrderGraphQL(CustomerService customerService, ProductService productService, OrderService orderService) {
+        this.orderService = orderService;
+        this.customerService = customerService;
+        this.productService = productService;
+    }
+
     public Order order(Long id) {
-        return service.findById(id);
+        return orderService.findById(id);
     }
 
     public List<Order> orders(int page, int size) {
         Pageable pageable = PageRequest.of(page,size, Sort.by("quantity"));
-        return service.findAll(pageable);
+        return orderService.findAll(pageable);
     }
 
     public List<OrderSummary> orderSummary() {
-        return service.findAllOrderSummary();
+        return orderService.findAllOrderSummary();
     }
 
     public Order saveOrder(OrderInput input) {
@@ -49,11 +48,11 @@ public class OrderGraphQL implements GraphQLQueryResolver, GraphQLMutationResolv
         order.setDate(new Date());
         order.setCustomer(customerService.findById(input.getCustomerId()));
         order.setProduct(productService.findById(input.getProductId()));
-        return service.save(order);
+        return orderService.save(order);
     }
 
     public Boolean deleteOrder(Long id) {
-        return service.deleteById(id);
+        return orderService.deleteById(id);
     }
 
 }

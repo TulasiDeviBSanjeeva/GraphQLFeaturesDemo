@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -25,14 +25,14 @@ public class DemoApplicationTests extends GraphQLTestTemplate {
     @Test
     public void testCustomers() throws IOException, JSONException {
 
-        GraphQLResponse response = perform("Customer.graphql", null);
+        GraphQLResponse response = perform("graphql/customer.graphqls", null);
 
         assertTrue(response.isOk());
 
         String json = response.getRawResponse().getBody();
         System.out.println("Body: " + json);
 
-        JSONArray jC = new JSONObject(json).getJSONObject("data").getJSONArray("Customers");
+        JSONArray jC = new JSONObject(json).getJSONObject("data").getJSONArray("customers");
         System.out.println(jC);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -41,4 +41,5 @@ public class DemoApplicationTests extends GraphQLTestTemplate {
 
         Customers.forEach(c -> System.out.println(c.getName()));
     }
+
 }

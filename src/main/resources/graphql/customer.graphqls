@@ -1,5 +1,12 @@
+scalar Date
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
 type Customer {
-    id:ID!,
+    id:ID!
     name:String!
     email:String!
 
@@ -7,18 +14,18 @@ type Customer {
 }
 
 input CustomerInput {
-    id:ID,
+    id:ID
     name:String!
     email:String!
 }
 
-extend type Query {
+type Query {
     customer(id:ID!):Customer
 
     customers:[Customer]!
 }
 
-extend type Mutation {
+type Mutation {
 
     saveCustomer(customer:CustomerInput!):Customer!
 

@@ -45,8 +45,8 @@ public class OrderService {
         return false;
     }
 
-    public List<Order> findAllByCustomer(Customer c) {
-        return orderRepository.findAllByCustomer(c.getId());
+    public List<Order> findAllByCustomer(Customer customer) {
+        return orderRepository.findAllByCustomerId(customer.getId());
     }
 
     public List<OrderSummary> findAllOrderSummary() {

@@ -1,9 +1,9 @@
 type Order {
     id: ID!
-    quantity: Int!,
+    quantity: Int!
+    status: String!
     date: Date!
-    status: String!,
-    customer: Customer,
+    customer: Customer
     product: Product!
 }
 
@@ -16,9 +16,9 @@ type OrderSummary {
 
 input OrderInput {
     id: ID
-    quantity: Int!,
-    status: String!,
-    customerId: ID!,
+    quantity: Int!
+    status: String!
+    customerId: ID!
     productId: ID!
 }
 

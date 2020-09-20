@@ -1,14 +1,14 @@
 type Product {
     id: ID!
-    name: String!,
-    price: Float!,
+    name: String!
+    price: Float!
     realPrice:String!
 }
 
 input ProductInput {
     id:ID,
     name:String!
-    price: Float,
+    price: Float
 }
 
 extend type Query {
@@ -21,6 +21,6 @@ extend type Query {
 extend type Mutation {
 
     saveProduct(product:ProductInput!):Product!
-    deleteproduct(id:ID!):Boolean!
+    deleteProduct(id:ID!):Boolean!
 
 }

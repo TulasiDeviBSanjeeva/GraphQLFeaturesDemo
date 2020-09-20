@@ -3,35 +3,36 @@ package com.example.demo.graphql;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.demo.domain.Product;
+import com.example.demo.graphql.input.ProductInput;
 import com.example.demo.service.ProductService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class ProductGraphQL implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    @Autowired
-    private ProductService service;
+    private ProductService productService;
+
+    public ProductGraphQL(ProductService productService) {
+        this.productService = productService;
+    }
 
     public Product product(Long id) {
-        return service.findById(id);
+        return productService.findById(id);
     }
 
     public List<Product> products() {
-        return service.findAll();
+        return productService.findAll();
     }
 
     public Product saveProduct(ProductInput input) {
         ModelMapper m = new ModelMapper();
         Product product = m.map(input,Product.class);
-        return service.save(product);
+        return productService.save(product);
     }
 
     public Boolean deleteProduct(Long id) {
-        return service.deleteById(id);
+        return productService.deleteById(id);
     }
 
 }

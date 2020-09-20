@@ -1,4 +1,4 @@
-package com.example.demo.graphql;
+package com.example.demo.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.demo.domain.Customer;
@@ -6,17 +6,16 @@ import com.example.demo.domain.Order;
 import com.example.demo.domain.Product;
 import com.example.demo.service.CustomerService;
 import com.example.demo.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class OrderResolver implements GraphQLResolver<Order> {
 
-    @Autowired
     private CustomerService customerService;
-
-    @Autowired
     private ProductService productService;
+
+    public OrderResolver(CustomerService customerService, ProductService productService) {
+      this.customerService = customerService;
+      this.productService = productService;
+    }
 
     public String status(Order order) {
         return order.getStatus();

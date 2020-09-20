@@ -1,6 +1,6 @@
-drop table if exists order ;
-drop table if exists product;
 drop table if exists customer;
+drop table if exists product;
+drop table if exists `order` ;
 
 create table customer (
                          id    bigint auto_increment primary key,
@@ -14,8 +14,7 @@ create table product(
                         price double       not null
 );
 
-create table order
-(
+create table `order`(
     id         bigint auto_increment primary key,
     date       datetime     null,
     quantity int          null,
