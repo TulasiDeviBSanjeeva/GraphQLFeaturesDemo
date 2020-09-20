@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Component
 public class DateScalar extends GraphQLScalarType {
+
     private static final String NAME = "Date";
 
     public DateScalar() {
