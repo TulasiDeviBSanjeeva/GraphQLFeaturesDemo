@@ -172,7 +172,50 @@ Reponse :
 }
 
 ```
-* Mutation : 1
+
+* Query3 : 
+
+```
+query {
+  purchaseSummary{
+    purchaseId
+    customer
+    product
+    quantity
+  }
+}
+```
+
+Response : 
+
+```
+{
+  "data": {
+    "purchaseSummary": [
+      {
+        "purchaseId": "1",
+        "customer": "Alia",
+        "product": "Brita tumbler",
+        "quantity": 10
+      },
+      {
+        "purchaseId": "2",
+        "customer": "Alia",
+        "product": "Bony Jacke",
+        "quantity": 20
+      },
+      {
+        "purchaseId": "3",
+        "customer": "Bubbly",
+        "product": "Bermuda Beauty",
+        "quantity": 30
+      }
+      ]
+  }
+}
+
+```
+* Mutation1 : 
 
 ```
 mutation {
@@ -199,7 +242,7 @@ Response :
 
 ```
 
-* Mutation : 2
+* Mutation2 : 
 
 ```
 mutation {
@@ -224,7 +267,7 @@ Response :
 }
 ```
 
-* Mutation : 3
+* Mutation3 : 
 
 ```
 mutation {
