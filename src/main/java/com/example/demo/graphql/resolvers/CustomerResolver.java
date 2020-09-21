@@ -1,21 +1,22 @@
 package com.example.demo.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.example.demo.domain.Customer;
-import com.example.demo.domain.Order;
-import com.example.demo.service.OrderService;
+import com.example.demo.domain.entities.Customer;
+import com.example.demo.domain.entities.Purchase;
+import com.example.demo.domain.service.PurchaseService;
 
 import java.util.List;
 
 public class CustomerResolver implements GraphQLResolver<Customer> {
 
-    private final OrderService orderService;
+    private PurchaseService purchaseService;
 
-    public CustomerResolver(OrderService orderService) {
-        this.orderService = orderService;
+    public CustomerResolver(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
     }
 
-    public List<Order> orders(Customer c) {
-        return orderService.findAllByCustomer(c);
+    public List<Purchase> customerPurchases(Customer customer) {
+        return purchaseService.findAllByCustomer(customer);
     }
+
 }

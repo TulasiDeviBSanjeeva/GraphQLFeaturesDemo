@@ -1,7 +1,7 @@
 package com.example.demo.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.example.demo.domain.Product;
+import com.example.demo.domain.entities.Product;
 
 public class ProductResolver implements GraphQLResolver<Product> {
 

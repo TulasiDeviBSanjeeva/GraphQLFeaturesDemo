@@ -1,4 +1,4 @@
-type Order {
+type Purchase {
     id: ID!
     quantity: Int!
     status: String!
@@ -7,14 +7,14 @@ type Order {
     product: Product!
 }
 
-type OrderSummary {
-    orderId : ID!
+type PurchaseSummary {
+    purchaseId : ID!
     customer: String!
     product: String!
     quantity: Int!
 }
 
-input OrderInput {
+input PurchaseInput {
     id: ID
     quantity: Int!
     status: String!
@@ -23,12 +23,12 @@ input OrderInput {
 }
 
 extend type Query {
-    order(id:ID!):Order
-    orders(page:Int = 0, size:Int = 10):[Order]!
-    orderSummary:[OrderSummary]
+    purchaseById(id:ID!):Purchase
+    purchases(page:Int = 0, size:Int = 10):[Purchase]!
+    purchaseSummary:[PurchaseSummary]
 }
 
 extend type Mutation {
-    saveOrder(order:OrderInput!):Order!
-    deleteOrder(id:ID!):Boolean!
+    savePurchase(purchase:PurchaseInput!):Purchase!
+    deletePurchase(id:ID!):Boolean!
 }

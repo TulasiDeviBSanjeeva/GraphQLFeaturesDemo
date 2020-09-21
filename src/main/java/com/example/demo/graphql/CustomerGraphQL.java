@@ -2,9 +2,9 @@ package com.example.demo.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.example.demo.domain.Customer;
+import com.example.demo.domain.entities.Customer;
 import com.example.demo.graphql.input.CustomerInput;
-import com.example.demo.service.CustomerService;
+import com.example.demo.domain.service.CustomerService;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class CustomerGraphQL implements GraphQLQueryResolver, GraphQLMutationRes
         this.customerService = customerService;
     }
 
-    public Customer customer(Long id) {
+    public Customer customerById(Long id) {
         return customerService.findById(id);
     }
 

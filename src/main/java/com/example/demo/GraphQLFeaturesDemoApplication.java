@@ -2,15 +2,15 @@ package com.example.demo;
 
 import com.coxautodev.graphql.tools.SchemaParser;
 import com.example.demo.graphql.CustomerGraphQL;
-import com.example.demo.graphql.OrderGraphQL;
+import com.example.demo.graphql.PurchaseGraphQL;
 import com.example.demo.graphql.ProductGraphQL;
 import com.example.demo.graphql.resolvers.CustomerResolver;
-import com.example.demo.graphql.resolvers.OrderResolver;
+import com.example.demo.graphql.resolvers.PurchaseResolver;
 import com.example.demo.graphql.resolvers.ProductResolver;
 import com.example.demo.graphql.scalar.DateScalar;
-import com.example.demo.service.CustomerService;
-import com.example.demo.service.OrderService;
-import com.example.demo.service.ProductService;
+import com.example.demo.domain.service.CustomerService;
+import com.example.demo.domain.service.PurchaseService;
+import com.example.demo.domain.service.ProductService;
 import graphql.execution.AsyncExecutionStrategy;
 import graphql.execution.ExecutionStrategy;
 import graphql.schema.GraphQLScalarType;
@@ -37,7 +37,7 @@ public class GraphQLFeaturesDemoApplication {
     ProductService productService;
 
     @Autowired
-    OrderService orderService;
+    PurchaseService purchaseService;
 
     public static void main(String[] args) {
         SpringApplication.run(GraphQLFeaturesDemoApplication.class, args);
@@ -47,14 +47,14 @@ public class GraphQLFeaturesDemoApplication {
     public ServletRegistrationBean servletRegistrationBean() {
 
         GraphQLSchema schema  = SchemaParser.newParser()
-                .resolvers(customerResolver(orderService), customerGraphQL(customerService))
+                .resolvers(customerResolver(purchaseService), customerGraphQL(customerService))
                 .resolvers(productResolver(), productGraphQL(productService))
                 .resolvers(orderResolver(customerService, productService),
-                        orderGraphQL(customerService, productService, orderService))
+                        orderGraphQL(customerService, productService, purchaseService))
                 .scalars(dateScalarType())
                 .file("graphql/customer.graphqls")
                 .file("graphql/product.graphqls")
-                .file("graphql/order.graphqls")
+                .file("graphql/purchase.graphqls")
                 .build().makeExecutableSchema();
         ExecutionStrategy executionStrategy = new AsyncExecutionStrategy();
         GraphQLServlet servlet = new SimpleGraphQLServlet(schema, executionStrategy);
@@ -71,8 +71,8 @@ public class GraphQLFeaturesDemoApplication {
 
 
     @Bean
-    public CustomerResolver customerResolver(OrderService orderService) {
-        return new CustomerResolver(orderService);
+    public CustomerResolver customerResolver(PurchaseService purchaseService) {
+        return new CustomerResolver(purchaseService);
     }
 
     @Bean
@@ -81,8 +81,8 @@ public class GraphQLFeaturesDemoApplication {
     }
 
     @Bean
-    public OrderResolver orderResolver(CustomerService customerService, ProductService productService) {
-        return new OrderResolver(customerService, productService);
+    public PurchaseResolver orderResolver(CustomerService customerService, ProductService productService) {
+        return new PurchaseResolver(customerService, productService);
     }
 
     @Bean
@@ -96,8 +96,8 @@ public class GraphQLFeaturesDemoApplication {
     }
 
     @Bean
-    public OrderGraphQL orderGraphQL(CustomerService customerService, ProductService productService, OrderService orderService) {
-        return new OrderGraphQL(customerService, productService, orderService);
+    public PurchaseGraphQL orderGraphQL(CustomerService customerService, ProductService productService, PurchaseService purchaseService) {
+        return new PurchaseGraphQL(customerService, productService, purchaseService);
     }
 
     @Bean

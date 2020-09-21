@@ -2,9 +2,9 @@ package com.example.demo.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.example.demo.domain.Product;
+import com.example.demo.domain.entities.Product;
 import com.example.demo.graphql.input.ProductInput;
-import com.example.demo.service.ProductService;
+import com.example.demo.domain.service.ProductService;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ProductGraphQL implements GraphQLQueryResolver, GraphQLMutationReso
         this.productService = productService;
     }
 
-    public Product product(Long id) {
+    public Product productById(Long id) {
         return productService.findById(id);
     }
 

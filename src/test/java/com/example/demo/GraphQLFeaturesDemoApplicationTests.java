@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.domain.Customer;
+import com.example.demo.domain.entities.Customer;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.graphql.spring.boot.test.GraphQLResponse;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class DemoApplicationTests extends GraphQLTestTemplate {
+public class GraphQLFeaturesDemoApplicationTests extends GraphQLTestTemplate {
 
     @Test
     public void testCustomers() throws IOException, JSONException {
