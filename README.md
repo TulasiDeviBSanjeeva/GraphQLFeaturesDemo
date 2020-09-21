@@ -12,23 +12,22 @@ http://localhost:8081/graphiql
 
 ```
 {
-  customers{
+  customers {
     id
     name
     email
-    customerPurchases{
+    customerPurchases {
       id
       quantity
       status
       date
-      product{
+      product {
         id
         name
         price
         realPrice
       }
     }
-    
   }
 }
 ```
@@ -128,16 +127,16 @@ Response :
 * Query2 :
 
 ```
-{
-  customerById(id: 2){
+query {
+  customerById(id: 2) {
     name
-    customerPurchases{
-	product{
-           name
-           realPrice
-      	}
-    quantity
-    date 
+    customerPurchases {
+      product {
+        name
+        realPrice
+      }
+      quantity
+      date
     }
   }
 }
@@ -176,14 +175,11 @@ Reponse :
 * Mutation : 1
 
 ```
-mutation
-{
-  saveCustomer(customer: {
-    id:4,
-    name:"Serria",
-    email: "Serria@gmail.com"
-  }) {
-    id, name, email
+mutation {
+  saveCustomer(customer: {id: 4, name: "Serria", email: "Serria@gmail.com"}) {
+    id
+    name
+    email
   }
 }
 ```
@@ -202,6 +198,32 @@ Response :
 }
 
 ```
+
+* Mutation : 2
+
+```
+mutation {
+  savePurchase(purchase: {id: 6, quantity: 12, status: "OK", customerId: 3, productId: 6}) {
+    id
+    status
+  }
+}
+
+```
+
+Response : 
+
+```
+{
+  "data": {
+    "savePurchase": {
+      "id": "6",
+      "status": "OK"
+    }
+  }
+}
+```
+
 
 
 
