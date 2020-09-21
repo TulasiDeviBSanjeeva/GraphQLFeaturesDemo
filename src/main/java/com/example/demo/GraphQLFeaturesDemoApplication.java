@@ -63,12 +63,10 @@ public class GraphQLFeaturesDemoApplication {
 
     }
 
-
     @Bean
     public GraphQLScalarType dateScalarType() {
         return new DateScalar();
     }
-
 
     @Bean
     public CustomerResolver customerResolver(PurchaseService purchaseService) {

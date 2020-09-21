@@ -40,7 +40,7 @@ public class DateScalar extends GraphQLScalarType {
                 if(dt != null) {
                     return dt;
                 }
-                throw new RuntimeException("Invalid Date: " + input);
+                return null;
             }
         });
     }

@@ -23,10 +23,10 @@ public class GraphQLHandler implements GraphQLErrorHandler {
 
     @Override
     public List<GraphQLError> processErrors(List<GraphQLError> list) {
-        return list.stream().map(this::getErros).collect(Collectors.toList());
+        return list.stream().map(this::getErrors).collect(Collectors.toList());
     }
 
-    private GraphQLError getErros(GraphQLError error) {
+    private GraphQLError getErrors(GraphQLError error) {
         if (error instanceof ExceptionWhileDataFetching) {
             ExceptionWhileDataFetching exceptionError = (ExceptionWhileDataFetching) error;
             if (exceptionError.getException() instanceof DomainException) {

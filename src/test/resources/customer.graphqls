@@ -1,0 +1,5 @@
+type customer {
+    id:ID!
+    name:String!
+    email:String!
+}
