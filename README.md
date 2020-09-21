@@ -224,6 +224,24 @@ Response :
 }
 ```
 
+* Mutation : 3
+
+```
+mutation {
+  deleteProduct(id: 6)
+}
+```
+
+Response : 
+
+```
+{
+  "data": {
+    "deleteProduct": true
+  }
+}
+```
+
 
 
 
