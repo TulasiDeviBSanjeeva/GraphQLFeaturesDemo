@@ -132,12 +132,12 @@ Response :
   customerById(id: 2){
     name
     customerPurchases{
-			product{
-        name
-        realPrice
-      }
-      quantity
-      date 
+	product{
+           name
+           realPrice
+      	}
+    quantity
+    date 
     }
   }
 }
