@@ -451,7 +451,7 @@ Response :
 1. Tests
 2. Extend filtering capability and handle exceptions
 3. Dockerize
-4. Implicit OAuth grant
+4. OAuth grant
 
 
 
