@@ -1,12 +1,23 @@
-# GraphQLFeaturesDemo
+# What is GraphQL
+It is a query language for making flexible API calls. One can avoid overfetchning of unwanted parts which is a big advantage over REST API. Just describe what you want in a single request with nested fields and be sure to receive a data payload of exact shape. 
 
 ## Launch application
+This is a simple springboot application. Clone the repository and run using, `mvn spring-boot:run` command. 
+Point your browser to the following url -
 
 ```
 http://localhost:8081/graphiql
 ```
 
-## Test Results
+## Queries
+
+Our queries are checked by server if they are valid against agreed contract(schema), and autowires corresponding resolvers to complete the request and prepares the data payload to be returned to the client. 
+
+Fragments simply make your query clean, readable and reusable. You can wrap subfields into a Fragment and resuse them. (see Query 3)
+You can as well define variables and default values . (see Query 4)
+
+Mutation operation is used to change the serverside data.
+
 
 * Query1 : 
 
@@ -173,7 +184,158 @@ Reponse :
 
 ```
 
-* Query3 : 
+* Query3 You can use aliases choose your desired different fields in each 
+
+```
+{
+  customer1: customerById(id: 1) {  ## Aliases
+    id
+    name
+    email
+    customerPurchases {
+      quantity
+      status
+      product {
+        ...ProductInfo
+      }
+    }
+  }
+  customer2: customerById(id: 2) {
+    name
+    customerPurchases {
+      quantity
+      product {
+        ...ProductInfo
+      }
+    }
+  }
+}
+
+fragment ProductInfo on Product {   ## Fragments
+  name
+  realPrice
+}
+
+```
+Response 
+
+```
+{
+  "data": {
+    "customer1": {    ##### Note customer1 datapayload
+      "id": "1",
+      "name": "Alia",
+      "email": "alia@axe.com",
+      "customerPurchases": [
+        {
+          "quantity": 10,
+          "status": "OK",
+          "product": {
+            "name": "Brita tumbler",
+            "realPrice": "Euros € : 25.0"
+          }
+        },
+        {
+          "quantity": 20,
+          "status": "OK",
+          "product": {
+            "name": "Bony Jacke",
+            "realPrice": "Euros € : 120.0"
+          }
+        }
+      ]
+    },
+    "customer2": { ##### Note customer1 datapayload
+      "name": "Bubbly",
+      "customerPurchases": [
+        {
+          "quantity": 30,
+          "product": {
+            "name": "Bermuda Beauty",
+            "realPrice": "Euros € : 60.0"
+          }
+        },
+        {
+          "quantity": 40,
+          "product": {
+            "name": "Cassendra Top",
+            "realPrice": "Euros € : 80.0"
+          }
+        }
+      ]
+    }
+  }
+}
+
+```
+
+* Query4 
+
+```
+query Purchase($page: Int, $size: Int) {
+  purchases(page: $page, size: $size) {
+    id
+    quantity
+    status
+    date
+    customer {
+      name
+    }
+    product {
+      name
+    }
+  }
+}
+
+```
+
+Query variables :
+
+```
+{
+  "page": 1,
+  "size": 2
+}
+
+```
+
+Response :
+
+```
+{
+  "data": {
+    "purchases": [
+      {
+        "id": "2",
+        "quantity": 20,
+        "status": "OK",
+        "date": "19/09/2020 07:13",
+        "customer": {
+          "name": "Alia"
+        },
+        "product": {
+          "name": "Bony Jacke"
+        }
+      },
+      {
+        "id": "3",
+        "quantity": 30,
+        "status": "OK",
+        "date": "19/09/2020 11:13",
+        "customer": {
+          "name": "Bubbly"
+        },
+        "product": {
+          "name": "Bermuda Beauty"
+        }
+      }
+    ]
+  }
+}
+
+```
+
+* Query5 : 
 
 ```
 query {
