@@ -2,7 +2,14 @@
 It is a query language for making flexible API calls. One can avoid overfetchning of unwanted parts which is a big advantage over REST API. Just describe what you want in a single request with nested fields and be sure to receive a data payload of exact shape. 
 
 ## Launch application
-This is a simple springboot application. Clone the repository and run using, `mvn spring-boot:run` command. 
+This is a simple springboot application. Clone the repository and run the application : 
+
+`mvn spring-boot:run` 
+
+OR
+
+use `docker-compose up`
+
 Point your browser to the following url -
 
 ```
